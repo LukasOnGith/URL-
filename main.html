@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="design.css" />
+  </head>
+  <body>
+    <h1>URL Shortener</h1>
+    <div class="container">
+      <div class="input-section">
+        <input
+          type="text"
+          id="urlInput"
+          placeholder="Enter your long URL here..."
+        />
+      </div>
+
+      <div class="input-section" style="align-items: center;">
+        <span style="font-weight: 500; margin-right: 8px;">Expires in</span>
+        <select id="expirationSelect">
+          <option value="0">Never</option>
+          <option value="3600000">1 Hour</option>
+          <option value="21600000">6 Hours</option>
+          <option value="86400000">24 Hours</option>
+          <option value="259200000">3 Days</option>
+          <option value="604800000">7 Days</option>
+        </select>
+      </div>
+
+      <div class="input-section">
+        <button id="shortenBtn">Shorten</button>
+      </div>
+
+      <div class="result" id="resultSection"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
