@@ -7,6 +7,9 @@ const crypto = require('crypto');
 
 const app = express();
 
+// Tell Express to trust the x-forwarded-for header from proxies
+app.set('trust proxy', true);
+
 // Use Railway's dynamic PORT or fallback to 3000
 const PORT = process.env.PORT || 3000;
 
@@ -62,9 +65,9 @@ app.post('/shorten', (req, res) => {
   try {
     new URL(originalUrl);
   } catch (error) {
-    return res.status(400).json({
-      error: 'Invalid URL format. Please include http:// or https://',
-    });
+    return res
+      .status(400)
+      .json({ error: 'Invalid URL format. Please include http:// or https://' });
   }
 
   // 2) Parse expiration
@@ -126,23 +129,23 @@ app.get('/:code', (req, res) => {
         (updateErr) => {
           if (updateErr) {
             console.error(updateErr);
-            // We'll still continue to the redirect, but the visit count won't update
+            // We'll still proceed with the redirect
           }
 
-          // Attempt better IP detection
-          const forwarded = req.headers['x-forwarded-for'];
-          const ipAddr = forwarded ? forwarded.split(',')[0].trim() : req.ip;
+          // Because we set 'trust proxy', req.ip now reflects the real client IP (x-forwarded-for)
+          const ipAddr = req.ip;
 
           // Build the Discord webhook message
           const timeString = new Date().toLocaleString();
           const shortenedUrl = `${req.protocol}://${req.get('host')}/${shortCode}`;
 
           const infoPayload = {
-            content: `**Shortened URL:** ${shortenedUrl}\n` +
-                     `**Original URL:** ${row.originalUrl}\n` +
-                     `**IP:** ${ipAddr}\n` +
-                     `**User-Agent:** ${req.headers['user-agent']}\n` +
-                     `**Timestamp:** ${timeString}`
+            content:
+              `**Shortened URL:** ${shortenedUrl}\n` +
+              `**Original URL:** ${row.originalUrl}\n` +
+              `**IP:** ${ipAddr}\n` +
+              `**User-Agent:** ${req.headers['user-agent']}\n` +
+              `**Timestamp:** ${timeString}`
           };
 
           // Debug log: see what we're about to send
