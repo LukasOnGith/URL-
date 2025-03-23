@@ -1,0 +1,167 @@
+/* 
+   Optional Google Font imports 
+   Uncomment below if you'd like custom fonts:
+*/
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@700&display=swap'); */
+
+/* Define CSS variables for consistency */
+:root {
+    --primary-gradient-1: #ff9a9e;
+    --primary-gradient-2: #fad0c4;
+    --primary-gradient-3: #fad0c4;
+    --primary-gradient-4: #fbc2eb;
+  
+    --container-bg: rgba(255, 255, 255, 0.2);
+    --container-border: rgba(255, 255, 255, 0.4);
+  
+    --button-bg: rgba(255, 255, 255, 0.8);
+    --button-border: #fff;
+    --button-hover-bg: #fff;
+    --button-hover-color: #f79489;
+  
+    --link-color: #f79489;
+    --link-hover-color: #c77469;
+    --text-color: #333;
+    --focus-color: #fbc2eb;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Global style with animated, moving background */
+  body {
+    margin: 0;
+    /* If using imported fonts, set them here:
+       font-family: 'Open Sans', sans-serif; */
+    font-family: sans-serif;
+    text-align: center;
+    background: linear-gradient(
+      -45deg,
+      var(--primary-gradient-1),
+      var(--primary-gradient-2),
+      var(--primary-gradient-3),
+      var(--primary-gradient-4)
+    );
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: var(--text-color);
+  }
+  
+  /* Keyframes to animate the background gradient */
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Headings */
+  h1 {
+    /* If using imported fonts, set them here:
+       font-family: 'Poppins', sans-serif; */
+    margin-top: 40px;
+    font-size: 2em;
+    letter-spacing: 1px;
+  }
+  
+  /* Container with a translucent, glassy effect */
+  .container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px 20px;
+    background: var(--container-bg);
+    border: 1px solid var(--container-border);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  /* Input and button section */
+  .input-section {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  #urlInput {
+    flex: 1;
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: 2px solid var(--button-border);
+    font-size: 1em;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  #urlInput:focus {
+    outline: none;
+    border-color: var(--focus-color);
+    box-shadow: 0 0 4px var(--focus-color);
+  }
+  
+  /* Button style */
+  #shortenBtn {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 2px solid var(--button-border);
+    background-color: var(--button-bg);
+    font-size: 1em;
+    font-weight: 600;
+    transition: 
+      background-color 0.3s ease,
+      color 0.3s ease,
+      transform 0.3s ease;
+  }
+  
+  #shortenBtn:hover {
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-color);
+    transform: scale(1.03);
+  }
+  
+  #shortenBtn:focus {
+    outline: none;
+    box-shadow: 0 0 4px var(--focus-color);
+  }
+  
+  /* Result section */
+  .result {
+    margin-top: 20px;
+    font-size: 1.1em;
+    font-weight: 500;
+    word-wrap: break-word;
+    line-height: 1.4;
+  }
+  
+  /* Make links stand out */
+  .result a {
+    text-decoration: none;
+    color: var(--link-color);
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .result a:hover {
+    color: var(--link-hover-color);
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 600px) {
+    .container {
+      margin: 20px auto;
+      padding: 20px 10px;
+    }
+    h1 {
+      font-size: 1.5em;
+    }
+  }
+  
